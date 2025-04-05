@@ -1,17 +1,11 @@
-# Usa la imagen de PHP con Apache
-FROM php:7.4-apache
+# Usa una imagen oficial de PHP con Apache
+FROM php:8.2-apache
 
-# Copia los archivos de tu proyecto al directorio de Apache
-COPY . /var/www/html
+# Copia los archivos del proyecto al directorio raíz de Apache
+COPY . /var/www/html/
 
-# Establece los permisos necesarios para el directorio de trabajo
-RUN chown -R www-data:www-data /var/www/html
-
-# Habilita el módulo de reescritura de URL (útil si usas archivos .htaccess)
+# Habilita el módulo rewrite (opcional, pero útil)
 RUN a2enmod rewrite
 
-# Expone el puerto 80 (puerto predeterminado de Apache)
+# Expone el puerto por defecto de Apache
 EXPOSE 80
-
-# Comando para iniciar Apache en modo foreground
-CMD ["apache2-foreground"]
